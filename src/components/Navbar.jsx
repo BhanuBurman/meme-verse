@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import Profile from '../components/Profile'
 import {
   Dialog,
   DialogPanel,
@@ -116,12 +117,13 @@ export default function Example() {
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-base/9 font-semibold text-gray-900 mr-2.5">
+          {/* <a href="#" className="text-base/9 font-semibold text-gray-900 mr-2.5">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
           <a href="#" className="bg-blue-600 rounded-md p-2 w-26 flex justify-center text-white text-1xl font-semibold">
             Sign up 
-          </a>
+          </a> */}
+          <Profile />
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
