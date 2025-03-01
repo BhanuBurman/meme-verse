@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
-import Dashboard from './pages/dashboard';
+import Dashboard from './pages/Dashboard';
 import MemeExplorer from './pages/MemeExplorer';
 import CreateMeme from './pages/CreateMeme';
 import MyProfilePage from './pages/MyProfilePage';
