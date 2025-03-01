@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TemplateViewer = () => {
   const location = useLocation();
   const templateId = location.state;
   const [templateData, setTemplateData] = useState(null);
   const [commentString, setCommentString] = useState("");
+
+  const [templateWebData, setTemplateWebData] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTemplate();
@@ -27,7 +31,7 @@ const TemplateViewer = () => {
       );
       const json = await response.json();
       console.log("Response from template:", json);
-
+      setTemplateWebData(json);
       const localInfo = getTemplateLocalInfo();
       const templateInfo = {
         id: templateId,
@@ -121,18 +125,19 @@ const TemplateViewer = () => {
           />
           <div className="m-2 h-15 flex justify-between items-center">
             <div className="">
-              <button className="text-3xl text-green-500" onClick={handleLikes}>
-                👍 {templateData.likes}
+              <button className="text-3xl text-green-500 cursor-pointer" onClick={handleLikes}>
+                👍{templateData.likes}
               </button>
               <button
-                className="text-3xl text-red-500"
+                className="text-3xl text-red-500 cursor-pointer ml-3"
                 onClick={handleDislikes}
               >
-                👎 {templateData.dislikes}
+                👎{templateData.dislikes}
               </button>
             </div>
             <button 
             className="bg-green-500 hover:bg-green-600 cursor-pointer rounded-md p-2 text-white text-2xl transition-all hover:scale-110"
+            onClick={() => navigate("/create-meme", {state : templateWebData})}
             >Use Template</button>
           </div>
 

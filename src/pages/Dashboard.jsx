@@ -21,7 +21,7 @@ const Dashboard = () => {
           Search from over <span className='font-bold text-violet-600'>1000+ templates</span>, unleash your creativity, and make the internet laugh! 😂🔥
         </p>
         <motion.button 
-          className='bg-violet-500 hover:bg-violet-600 transition-all duration-300 px-6 py-3 rounded-md text-white text-lg shadow-lg'
+          className='w-90 bg-violet-500 hover:bg-violet-600 transition-all duration-300 px-6 py-3 rounded-md text-white text-lg shadow-lg'
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => navigate('create-meme')}

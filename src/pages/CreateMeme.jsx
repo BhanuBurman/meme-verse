@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const CreateMeme = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -10,6 +11,23 @@ const CreateMeme = () => {
   const [mode, setMode] = useState("create");
   const [aiPrompt, setAiPrompt] = useState("");
   const [aiResponse, setAiResponse] = useState(null);
+
+  const [isGenerating, setIsGenerating] = useState(false);
+
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state) {
+      const data = location.state;
+      console.log("Data coming from template:", data);
+  
+      setPreviewUrl(data.blank);
+      
+      // ✅ Fixed: Use array indexing instead of .getItem()
+      setCaption1(data.example.text[0] || ""); 
+      setCaption2(data.example.text[1] || "");
+    }
+  }, [location.state]);  
 
   const [isLoadingSave, setIsLoadingSave] = useState(false);
 
@@ -127,6 +145,7 @@ const CreateMeme = () => {
       return;
     }
 
+    setIsGenerating(true);
     try {
       const response = await fetch("https://api.memegen.link/images/automatic", {
         method: "POST",
@@ -135,10 +154,12 @@ const CreateMeme = () => {
       });
 
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
+      
       const data = await response.json();
+      console.log("AI response: ",data);
       setAiResponse(data);
-      updateLocalStorage(data.url); // Save AI-generated meme in localStorage
+      // updateLocalStorage(data.url); // Save AI-generated meme in localStorage
+      setIsGenerating(false);
     } catch (e) {
       console.error("Error generating meme:", e);
       alert("Error generating meme. Please try again later.");
@@ -184,7 +205,7 @@ const CreateMeme = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-6 border-2">
+    <div className="flex flex-col items-center justify-start min-h-screen p-6 ">
       <h1 className="text-3xl font-semibold text-gray-900">Create Meme</h1>
       <p className="text-sm text-gray-500">Upload an image, add captions, and save your meme.</p>
 
@@ -216,12 +237,12 @@ const CreateMeme = () => {
 
               <div className="flex flex-col gap-4 pl-5 py-10">
                 <input type="text" placeholder="Top Caption" value={caption1} onChange={(e) => setCaption1(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />
-                {caption1.length > 1 && <input type="text" placeholder="Bottom Caption" value={caption2} onChange={(e) => setCaption2(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />}
+                <input type="text" placeholder="Bottom Caption" value={caption2} onChange={(e) => setCaption2(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />
               </div>
             </div>
           )}
 
-          {selectedImage && (
+          {(selectedImage || previewUrl) && (
             <button onClick={saveCreateMemeLocally} 
             className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer"
             disabled={isLoadingSave}
@@ -234,11 +255,37 @@ const CreateMeme = () => {
 
       {/* AI Meme Generation Mode */}
       {mode === "ai" && (
-        <div className="mt-4">
+        <div className="mt-4 min-w-100">
           <input type="text" placeholder="Enter a prompt" value={aiPrompt} onChange={(e) => setAiPrompt(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />
-          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" onClick={handleGenerateMeme}>
-            Generate Meme
-          </button>
+          <div className="">
+
+            <button 
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" 
+            onClick={handleGenerateMeme}
+            disabled= {isGenerating}
+            >
+              {isGenerating? "Generating..." : "Generate Meme"}
+            </button>
+            {aiResponse && (
+              <span className="ml-4">Confidence : {(aiResponse.confidence*100).toFixed(2)}%</span>
+            )}
+            </div>
+          {aiResponse && (
+            <div className="flex mt-4">
+              <div className="relative p-2 border border-gray-300 rounded-lg shadow-md w-[480px] h-[480px] flex items-center justify-center">
+                <img src={aiResponse.url} alt="Preview" className="w-full h-full object-cover rounded-md" />
+
+              </div>
+            </div>
+          )}
+          {(aiResponse) && (
+            <button onClick={() => updateLocalStorage(aiResponse.url)} 
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer"
+            disabled={isLoadingSave}
+            >
+              {isLoadingSave? "Saving..." : "Save Meme"}
+            </button>
+          )}
         </div>
       )}
     </div>

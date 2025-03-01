@@ -27,7 +27,7 @@ export default function Navbar() {
       <header className="bg-white shadow-md p-4 relative z-50">
         <nav className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <a href="#" className="text-2xl font-bold text-gray-900">Meme Maker</a>
+            <NavLink to="/" className="text-2xl font-bold text-gray-900">Meme Maker</NavLink>
           </div>
           <div className="flex space-x-6 text-lg">
             <NavLink to="/" className={({ isActive }) => isActive ? "text-violet-500 font-semibold" : "text-gray-700 hover:text-violet-500"}>Home</NavLink>
