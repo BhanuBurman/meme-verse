@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 
 const MyProfilePage = () => {
   const [memes, setMemes] = useState([]);
+  const [userName, setUserName] = useState(null);
 
   useEffect(() => {
     const storedMemes = JSON.parse(localStorage.getItem("my-memes")) || [];
+    const userDetails = JSON.parse(localStorage.getItem("login-info")) || null;
     setMemes(storedMemes);
+    setUserName(userDetails.username);
   }, []);
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">My Profile</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-4">Hi👋, {userName}</h1>
       <p className="text-lg text-gray-700">Welcome to your profile page.</p>
       <h2 className="text-2xl font-semibold text-gray-900 mt-6">Your Created Memes</h2>
 

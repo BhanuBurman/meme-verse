@@ -11,6 +11,8 @@ const CreateMeme = () => {
   const [aiPrompt, setAiPrompt] = useState("");
   const [aiResponse, setAiResponse] = useState(null);
 
+  const [isLoadingSave, setIsLoadingSave] = useState(false);
+
   useEffect(() => {
     const storedMemes = JSON.parse(localStorage.getItem("my-memes")) || [];
     setSavedMemes(storedMemes);
@@ -149,6 +151,8 @@ const CreateMeme = () => {
       return;
     }
 
+    setIsLoadingSave(true);
+
     try {
       const uploadedUrl = await uploadImageToCloudinary(selectedImage);
       if (!uploadedUrl) return;
@@ -166,6 +170,7 @@ const CreateMeme = () => {
       setCreatedCustomImage(data);
       console.log(data);
       updateLocalStorage(data.url); // Save custom meme in localStorage
+      setIsLoadingSave(false);
     } catch (e) {
       console.error("Error creating custom meme:", e);
       alert("Error creating custom meme. Please try again later.");
@@ -217,8 +222,11 @@ const CreateMeme = () => {
           )}
 
           {selectedImage && (
-            <button onClick={saveCreateMemeLocally} className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-              Save Meme
+            <button onClick={saveCreateMemeLocally} 
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer"
+            disabled={isLoadingSave}
+            >
+              {isLoadingSave? "Saving..." : "Save Meme"}
             </button>
           )}
         </>

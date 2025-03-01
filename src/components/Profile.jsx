@@ -23,6 +23,12 @@ const Profile = () => {
     };
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("login-info");
+    navigate("/");
+    window.location.reload(); // Refresh page to update navbar
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -55,12 +61,12 @@ const Profile = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#"
+              <button
+                onClick={handleLogout}
                 className="block px-4 py-2 text-gray-900 hover:bg-gray-100"
               >
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>
