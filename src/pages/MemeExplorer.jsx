@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaRegComment } from "react-icons/fa";
+import { IoFilterOutline } from "react-icons/io5"; 
 import { useNavigate } from "react-router-dom";
 
 const MemeExplorer = () => {
@@ -8,6 +9,7 @@ const MemeExplorer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAnimated, setIsAnimated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const memesPerPage = 20;
 
   const [activeFilter, setActiveFilter] = useState("All"); // Default active is "All"
@@ -25,7 +27,7 @@ const MemeExplorer = () => {
       setLoading(true);
       const response = await fetch(
         `https://api.memegen.link/templates?filter=${searchString}&animated=${isAnimated}`
-      );
+      , );
       const json = await response.json();
 
       // Retrieve stored likes/dislikes data from localStorage
@@ -117,13 +119,13 @@ const MemeExplorer = () => {
       {/* Search Bar */}
       <div className="flex">
         <input
-          className="rounded-l-md border-2 w-96 p-2 text-lg outline-none focus:border-blue-500"
+          className="rounded-l-md border-2 w-60 md:w-96 p-2 text-base md:text-lg outline-none focus:border-blue-500"
           type="text"
           placeholder="Search by typing some word..."
           onChange={(event) => setSearchString(event.target.value)}
         />
         <button
-          className="px-4 bg-blue-700 text-white rounded-r-md hover:bg-blue-800 cursor-pointer flex items-center justify-center min-w-[100px] disabled:bg-blue-400"
+          className=" md:px-4 bg-blue-700 text-white rounded-r-md hover:bg-blue-800 cursor-pointer flex items-center justify-center min-w-[65px] disabled:bg-blue-400"
           onClick={fetchData}
           disabled={loading} // Disable button while loading
         >
@@ -136,11 +138,11 @@ const MemeExplorer = () => {
       </div>
 
       {/* Filters */}
-      <div className="filters min-h-14 w-full flex justify-center mt-4 ">
-        <p className="flex justify-center items-center text-2xl shadow-md w-64 p-2 bg-gray-200 border-r border-r-gray-400 rounded-tl-lg rounded-bl-lg text-black">
+      <div className="filters h-10 md:h-14 w-full flex justify-center mt-4 ">
+        <p className="hidden md:flex justify-center items-center text-sm md:text-base lg:text-2xl shadow-md md:w-60 p-2 bg-gray-200 border-r border-r-gray-400 rounded-tl-lg rounded-bl-lg text-black">
           -- Choose Filter --
         </p>
-        <div className="group p-4 flex justify-evenly bg-gray-200 rounded-br-lg rounded-tr-lg w-3/4 shadow-md">
+        <div className="hidden md:flex group p-2 justify-evenly bg-gray-200 rounded-br-lg rounded-tr-lg w-3/4 shadow-md">
           {filters.map((filter) => (
             <button
               key={filter}
@@ -157,6 +159,38 @@ const MemeExplorer = () => {
             </button>
           ))}
         </div>
+        <div className="md:hidden flex justify-center items-center text-2xl">
+          Choose Filter: 
+        <button
+        onClick={() => setShowFilters(!showFilters)}
+        className="md:hidden ml-4 flex items-center gap-2 text-base bg-gray-200 px-4 py-2 rounded-md shadow-md border-2 border-gray-400"
+        >
+        <IoFilterOutline className="text-lg" />
+        {activeFilter}
+      </button>
+          </div>
+        {showFilters && (
+        <div className="md:hidden z-10 absolute md:relative mt-2 flex flex-col w-3/4 bg-gray-200 shadow-md rounded-md">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              className={`p-2 text-center border-b border-gray-300 cursor-pointer transition-colors duration-300
+                          ${
+                            activeFilter === filter
+                              ? "bg-blue-500 text-white"
+                              : "bg-gray-400 text-white hover:bg-gray-500"
+                          }
+                          `}
+              onClick={() => {
+                handleFilter(filter);
+                setShowFilters(false); // Hide list after selecting
+              }}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+      )}
       </div>
 
       {/* Meme Grid */}
@@ -172,19 +206,19 @@ const MemeExplorer = () => {
             </div>
         )
             } */}
-      <div className="memes w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-6">
+      <div className="memes w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-6">
         {currentMemes.map((item, index) => (
           <div
             key={index}
-            className="w-56 max-w-xs mx-auto shadow-lg rounded-md bg-violet-100 overflow-hidden flex flex-col h-full cursor-pointer hover:scale-102 transition-all hover:shadow-2xl"
+            className="w-40 sm:w-43 md:w-56 max-w-xs mx-auto shadow-lg rounded-md bg-violet-100 overflow-hidden flex flex-col h-full cursor-pointer hover:scale-102 transition-all hover:shadow-2xl"
             onClick={() => navigate("/template-viewer", {state: item.id})}
           >
             <img
-              className="w-full h-58 object-cover"
+              className="w-full h-full object-cover"
               src={item.example.url}
               alt={item.name}
             />
-            <p className="text-center font-semibold p-2 flex-grow">
+            <p className="text-center font-semibold p-1 md:p-2 text-sm md:text-lg flex-grow">
               {item.name}
             </p>
 

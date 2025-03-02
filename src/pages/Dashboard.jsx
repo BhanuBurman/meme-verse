@@ -7,7 +7,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container bg-violet-200 h-screen flex flex-col md:flex-row items-center justify-center px-8">
+    <div className="container bg-violet-200 md:h-screen h-220 flex flex-col md:flex-row items-center justify-center px-8 ">
       <motion.div 
         className="title flex flex-col text-center md:text-left p-8"
         initial={{ opacity: 0, x: -50 }}
@@ -21,7 +21,7 @@ const Dashboard = () => {
           Search from over <span className='font-bold text-violet-600'>1000+ templates</span>, unleash your creativity, and make the internet laugh! 😂🔥
         </p>
         <motion.button 
-          className='w-90 bg-violet-500 hover:bg-violet-600 transition-all duration-300 px-6 py-3 rounded-md text-white text-lg shadow-lg'
+          className='w-90 bg-violet-500 hover:bg-violet-600 transition-all duration-300 px-6 py-3 rounded-md text-white text-lg shadow-lg m-auto md:m-0'
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => navigate('create-meme')}

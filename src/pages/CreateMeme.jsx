@@ -205,7 +205,7 @@ const CreateMeme = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-6 ">
+    <div className="flex flex-col items-center justify-start min-h-screen p-6">
       <h1 className="text-3xl font-semibold text-gray-900">Create Meme</h1>
       <p className="text-sm text-gray-500">Upload an image, add captions, and save your meme.</p>
 
@@ -228,8 +228,8 @@ const CreateMeme = () => {
           </label>
 
           {previewUrl && (
-            <div className="flex mt-4">
-              <div className="relative p-2 border border-gray-300 rounded-lg shadow-md w-[480px] h-[480px] flex items-center justify-center">
+            <div className="md:flex mt-4">
+              <div className="relative p-2 border border-gray-300 rounded-lg shadow-md md:w-[480px] md:h-[480px] flex items-center justify-center">
                 <p className="absolute top-3 left-1/2 transform -translate-x-1/2 text-white font-extrabold text-3xl w-90 text-center">{caption1.toUpperCase()}</p>
                 <img src={previewUrl} alt="Preview" className="w-full h-full object-cover rounded-md" />
                 <p className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-white font-extrabold text-3xl w-90 text-center">{caption2.toUpperCase()}</p>
@@ -272,7 +272,7 @@ const CreateMeme = () => {
             </div>
           {aiResponse && (
             <div className="flex mt-4">
-              <div className="relative p-2 border border-gray-300 rounded-lg shadow-md w-[480px] h-[480px] flex items-center justify-center">
+              <div className="relative p-2 border border-gray-300 rounded-lg shadow-md md:w-[480px] md:h-[480px] flex items-center justify-center">
                 <img src={aiResponse.url} alt="Preview" className="w-full h-full object-cover rounded-md" />
 
               </div>
