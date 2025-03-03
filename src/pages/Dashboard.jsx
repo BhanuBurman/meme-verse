@@ -35,7 +35,7 @@ const Dashboard = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
       >
-        <img className="object-center h-96 rounded-xl shadow-2xl hover:scale-105 transition-transform duration-300" src={HomeBG} alt="Meme Background" />
+        <img className="object-center h-96 rounded-xl shadow-2xl  hover:scale-105 transition-transform duration-300" src={HomeBG} alt="Meme Background" />
       </motion.div>
     </div>
   );

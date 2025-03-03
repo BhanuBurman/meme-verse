@@ -114,8 +114,8 @@ const TemplateViewer = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-violet-300">
       {templateData ? (
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
-          <h2 className="text-3xl font-bold text-center">
+        <div className="my-7 bg-white shadow-lg rounded-lg p-6 max-w-lg w-full dark:bg-slate-800">
+          <h2 className="text-3xl font-bold text-center dark:text-white">
             {templateData.name}
           </h2>
           <img
@@ -145,7 +145,7 @@ const TemplateViewer = () => {
           <div className="mt-6">
             <div className="flex">
               <input
-                className="flex-1 border border-gray-300 p-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="dark:bg-white flex-1 border border-gray-300 p-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 value={commentString}
                 placeholder="Add a comment..."
@@ -161,7 +161,7 @@ const TemplateViewer = () => {
           </div>
 
           {/* Comment Section */}
-          <h3 className="mt-6 text-xl font-semibold">Comments:</h3>
+          <h3 className="dark:text-white mt-6 text-xl font-semibold">Comments:</h3>
           <ul className="mt-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
             {templateData.comments.length > 0 ? (
               templateData.comments.map((comment, index) => (

@@ -5,6 +5,7 @@ import {motion} from "framer-motion";
 import Profile from "../components/Profile";
 import LoginPopup from "./LoginPopup";
 import SignupPopup from "./SignupPopup";
+import DarkModeToggle from "./DarkModeToggle";
 
 import { IoReorderThreeOutline } from "react-icons/io5";
 
@@ -13,7 +14,7 @@ export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
-
+  
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("login-info"));
     if (storedUser) {
@@ -29,10 +30,10 @@ export default function Navbar() {
           {showSignup && <SignupPopup onClose={() => setShowSignup(false)} />}
         </div>
       )}
-      <header className="bg-white shadow-md p-4 relative z-50">
+      <header className="bg-white dark:bg-slate-800 shadow-md dark:shadow-gray-400 p-4 relative z-50">
         <nav className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <NavLink to="/" className="text-2xl font-bold text-gray-900">
+            <NavLink to="/" className="text-2xl font-bold text-gray-900 dark:text-white">
               Meme Maker
             </NavLink>
           </div>
@@ -43,47 +44,59 @@ export default function Navbar() {
               className={({ isActive }) =>
                 isActive
                   ? "text-violet-500 font-semibold"
-                  : "text-gray-700 hover:text-violet-500"
+                  : "text-gray-700 hover:text-violet-500 dark:text-white"
               }
             >
               Home
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-violet-500 font-semibold"
-                  : "text-gray-700 hover:text-violet-500"
-              }
-            >
-              Contact Us
-            </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-violet-500 font-semibold"
-                  : "text-gray-700 hover:text-violet-500"
-              }
-            >
-              About
             </NavLink>
             <NavLink
               to="/create-meme"
               className={({ isActive }) =>
                 isActive
                   ? "text-violet-500 font-semibold"
-                  : "text-gray-700 hover:text-violet-500"
+                  : "text-gray-700 hover:text-violet-500 dark:text-white"
               }
             >
               Create Meme
             </NavLink>
+            <NavLink
+              to="/leaderboard"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-violet-500 font-semibold"
+                  : "text-gray-700 hover:text-violet-500 dark:text-white"
+              }
+            >
+              Leaderboard
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-violet-500 font-semibold"
+                  : "text-gray-700 hover:text-violet-500 dark:text-white"
+              }
+            >
+              About
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-violet-500 font-semibold"
+                  : "text-gray-700 hover:text-violet-500 dark:text-white"
+              }
+            >
+              Contact Us
+            </NavLink>
           </div>
           <div className="hidden md:flex">
+            {<DarkModeToggle />}
             {user ? (
               <Profile />
             ) : (
               <div className="flex gap-4">
+
                 <button
                   onClick={() => setShowLogin(true)}
                   className="text-gray-900 text-sm font-semibold"
@@ -111,7 +124,7 @@ export default function Navbar() {
               animate={{ x: 0, opacity: 1 }} // Slide in smoothly
               exit={{ x: "100%", opacity: 0 }} // Slide out when closed
               transition={{ type: "ease-in-out", duration: 0.3 }} // Smooth transition
-              className="absolute right-0 top-16 w-52 max-w-md bg-white shadow-2xl rounded-md z-50"
+              className="absolute right-0 top-16 w-52 max-w-md bg-white shadow-2xl dark:shadow-gray-400 rounded-md z-50"
             >
               <div className=" py-3 space-y-4 flex flex-col">
                 {user && (
@@ -129,10 +142,16 @@ export default function Navbar() {
                   Home
                 </NavLink>
                 <NavLink
-                  to="/contact"
+                  to="/create-meme"
                   className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
                 >
-                  Contact Us
+                  Create Meme
+                </NavLink>
+                <NavLink
+                  to="/leaderboard"
+                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                >
+                  Leaderboard
                 </NavLink>
                 <NavLink
                   to="/about"
@@ -141,10 +160,10 @@ export default function Navbar() {
                   About
                 </NavLink>
                 <NavLink
-                  to="/create-meme"
+                  to="/contact"
                   className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
                 >
-                  Create Meme
+                  Contact Us
                 </NavLink>
                 {!user && (
                   <>

@@ -205,9 +205,9 @@ const CreateMeme = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-6">
-      <h1 className="text-3xl font-semibold text-gray-900">Create Meme</h1>
-      <p className="text-sm text-gray-500">Upload an image, add captions, and save your meme.</p>
+    <div className="flex flex-col items-center justify-start min-h-screen p-6 dark:bg-slate-800">
+      <h1 className="text-3xl font-semibold text-gray-900 dark:text-white">Create Meme</h1>
+      <p className="text-sm text-gray-500 dark:text-violet-100">Upload an image, add captions, and save your meme.</p>
 
       {/* Toggle Buttons */}
       <div className="flex gap-4 mt-4">
@@ -236,8 +236,8 @@ const CreateMeme = () => {
               </div>
 
               <div className="flex flex-col gap-4 pl-5 py-10">
-                <input type="text" placeholder="Top Caption" value={caption1} onChange={(e) => setCaption1(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />
-                <input type="text" placeholder="Bottom Caption" value={caption2} onChange={(e) => setCaption2(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />
+                <input type="text" placeholder="Top Caption" value={caption1} onChange={(e) => setCaption1(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg dark:bg-white" />
+                <input type="text" placeholder="Bottom Caption" value={caption2} onChange={(e) => setCaption2(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg dark:bg-white" />
               </div>
             </div>
           )}
@@ -256,7 +256,7 @@ const CreateMeme = () => {
       {/* AI Meme Generation Mode */}
       {mode === "ai" && (
         <div className="mt-4 min-w-100">
-          <input type="text" placeholder="Enter a prompt" value={aiPrompt} onChange={(e) => setAiPrompt(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg" />
+          <input type="text" placeholder="Enter a prompt" value={aiPrompt} onChange={(e) => setAiPrompt(e.target.value)} className="px-4 py-2 border-2 border-gray-300 rounded-md w-full text-lg dark:bg-white" />
           <div className="">
 
             <button 

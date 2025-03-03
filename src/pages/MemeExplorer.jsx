@@ -108,18 +108,18 @@ const MemeExplorer = () => {
   const totalPages = Math.ceil(data.length / memesPerPage);
 
   return (
-    <div className="container flex flex-col justify-center min-h-screen h-fit w-full items-center p-6">
-      <p className="text-4xl font-bold text-center mt-6">
+    <div className="container flex flex-col justify-center min-h-screen h-fit w-full items-center p-6 dark:bg-slate-800">
+      <p className="text-4xl font-bold text-center mt-6 dark:text-white">
         Smarter Creativity and Faster Designs
       </p>
-      <p className="text-xl text-center mb-4 text-gray-600">
+      <p className="text-xl text-center mb-4 text-gray-600 dark:text-violet-300">
         Create memes instantly with our vast collection of templates.
       </p>
 
       {/* Search Bar */}
       <div className="flex">
         <input
-          className="rounded-l-md border-2 w-60 md:w-96 p-2 text-base md:text-lg outline-none focus:border-blue-500"
+          className="dark:bg-white rounded-l-md border-2 w-60 md:w-96 p-2 text-base md:text-lg outline-none focus:border-blue-500"
           type="text"
           placeholder="Search by typing some word..."
           onChange={(event) => setSearchString(event.target.value)}
@@ -138,11 +138,11 @@ const MemeExplorer = () => {
       </div>
 
       {/* Filters */}
-      <div className="filters h-10 md:h-14 w-full flex justify-center mt-4 ">
-        <p className="hidden md:flex justify-center items-center text-sm md:text-base lg:text-2xl shadow-md md:w-60 p-2 bg-gray-200 border-r border-r-gray-400 rounded-tl-lg rounded-bl-lg text-black">
+      <div className="filters  h-10 md:h-14 w-full flex justify-center mt-4 ">
+        <p className="hidden dark:bg-violet-200 md:flex justify-center items-center text-sm md:text-base lg:text-2xl shadow-md md:w-60 p-2 bg-gray-200 border-r border-r-gray-400 rounded-tl-lg rounded-bl-lg text-black">
           -- Choose Filter --
         </p>
-        <div className="hidden md:flex group p-2 justify-evenly bg-gray-200 rounded-br-lg rounded-tr-lg w-3/4 shadow-md">
+        <div className="hidden dark:bg-violet-200 md:flex group p-2 justify-evenly bg-gray-200 rounded-br-lg rounded-tr-lg w-3/4 shadow-md">
           {filters.map((filter) => (
             <button
               key={filter}
@@ -210,7 +210,7 @@ const MemeExplorer = () => {
         {currentMemes.map((item, index) => (
           <div
             key={index}
-            className="w-40 sm:w-43 md:w-56 max-w-xs mx-auto shadow-lg rounded-md bg-violet-100 overflow-hidden flex flex-col h-full cursor-pointer hover:scale-102 transition-all hover:shadow-2xl"
+            className="dark:bg-gray-900 w-40 sm:w-43 md:w-56 max-w-xs mx-auto shadow-lg dark:shadow-gray-700 rounded-md bg-violet-100 overflow-hidden flex flex-col h-full cursor-pointer hover:scale-102 transition-all hover:shadow-2xl"
             onClick={() => navigate("/template-viewer", {state: item.id})}
           >
             <img
@@ -218,7 +218,7 @@ const MemeExplorer = () => {
               src={item.example.url}
               alt={item.name}
             />
-            <p className="text-center font-semibold p-1 md:p-2 text-sm md:text-lg flex-grow">
+            <p className="dark:text-white text-center font-semibold p-1 md:p-2 text-sm md:text-lg flex-grow">
               {item.name}
             </p>
 
@@ -241,10 +241,10 @@ const MemeExplorer = () => {
                   👎
                 </span>{" "}
                 {item.dislikes}
-              </button>
-                 <FaRegComment />
+              </button >
+                 <FaRegComment className="dark:text-white" />
                  {" "}
-                 {item.comments.length}
+                 <span className="dark:text-white">{item.comments.length}</span>
                 
             </div>
           </div>
