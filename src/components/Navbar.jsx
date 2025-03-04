@@ -34,7 +34,7 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
             <NavLink to="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-              Meme Maker
+              Meme Verse
             </NavLink>
           </div>
           {/* {Desktop Navigation} */}
