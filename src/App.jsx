@@ -6,6 +6,7 @@ import MemeExplorer from './pages/MemeExplorer';
 import CreateMeme from './pages/CreateMeme';
 import MyProfilePage from './pages/MyProfilePage';
 import TemplateViewer from './pages/TemplateViewer';
+import Leaderboard from './pages/Leaderboard';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path ="/create-meme" element ={<CreateMeme />}></Route>
         <Route path ="/my-profile" element ={<MyProfilePage />}></Route>
         <Route path ="/template-viewer" element ={<TemplateViewer />}></Route>
+        <Route path='/leaderboard' element={<Leaderboard />}></Route>
       </Routes>
     </Router>
   );

@@ -40,10 +40,12 @@ const MemeExplorer = () => {
         dislikes: storedData[meme.id]?.dislikes || 0,
         comments: storedData[meme.id]?.comments || [],
       }));
-
+      console.log(updatedData);
+      
       // Store updated data back in localStorage
       const updatedStats = updatedData.reduce((acc, meme) => {
         acc[meme.id] = {
+          url: meme.example.url,
           likes: meme.likes,
           dislikes: meme.dislikes,
           comments: meme.comments,
