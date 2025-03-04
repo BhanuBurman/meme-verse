@@ -99,7 +99,7 @@ export default function Navbar() {
 
                 <button
                   onClick={() => setShowLogin(true)}
-                  className="text-gray-900 text-sm font-semibold"
+                  className="text-gray-900 text-sm font-semibold dark:text-white"
                 >
                   Login
                 </button>
@@ -126,45 +126,46 @@ export default function Navbar() {
               transition={{ type: "ease-in-out", duration: 0.3 }} // Smooth transition
               className="absolute right-0 top-16 w-52 max-w-md bg-white shadow-2xl dark:shadow-gray-400 rounded-md z-50"
             >
-              <div className=" py-3 space-y-4 flex flex-col">
+              <div className=" py-3 flex flex-col">
                 {user && (
                   <NavLink
                     to="/my-profile"
-                    className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                    className="text-gray-900 hover:text-violet-500 border-b-1 px-4 py-1 border-gray-400"
                   >
                     My Profile
                   </NavLink>
                 )}
                 <NavLink
                   to="/"
-                  className=" text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                  className=" text-gray-900 hover:text-violet-500 border-b-1 px-4 py-1 border-gray-400"
                 >
                   Home
                 </NavLink>
                 <NavLink
                   to="/create-meme"
-                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 py-1 border-gray-400"
                 >
                   Create Meme
                 </NavLink>
                 <NavLink
                   to="/leaderboard"
-                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 py-1 border-gray-400"
                 >
                   Leaderboard
                 </NavLink>
                 <NavLink
                   to="/about"
-                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 py-1 border-gray-400"
                 >
                   About
                 </NavLink>
                 <NavLink
                   to="/contact"
-                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 border-gray-400"
+                  className="text-gray-900 hover:text-violet-500 border-b-1 px-4 py-1 border-gray-400"
                 >
                   Contact Us
                 </NavLink>
+                <div className="items-center flextext-gray-900 hover:text-violet-500  px-4 py-2 border-gray-400">Dark Mode: <DarkModeToggle /></div>
                 {!user && (
                   <>
                     <button
