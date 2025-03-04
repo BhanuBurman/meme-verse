@@ -1,7 +1,10 @@
 # Meme Maker App
 
 ## 📌 Overview
-The **Meme Maker App** allows users to create memes by uploading images, adding custom captions, and generating AI-based memes. Users can also save their created memes and access them later.
+The **Meme Maker App** allows users to create memes by uploading images, adding custom captions, and generating AI-based memes. Users can also save their created memes and access them later. This website is deployed in netlify which is accessible through this link: [Meme Maker](https://ogmemeverse.netlify.app/ "Go to Meme page")
+
+## 📹 Introductory Video
+
 
 ## ✨ Features
 - Upload an image and add captions
