@@ -167,7 +167,7 @@ const CreateMeme = () => {
   };
 
   const saveCreateMemeLocally = async () => {
-    if (!selectedImage) {
+    if (!previewUrl) {
       alert("Please select an image first!");
       return;
     }
